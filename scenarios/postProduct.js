@@ -1,7 +1,7 @@
 import http from 'k6/http'
 import { sleep } from 'k6'
 import { check, fail } from 'k6'
-import setup from '../setup'
+import auth from '../auth';
 import { faker } from '@faker-js/faker';
 
 
@@ -9,15 +9,17 @@ export default function () {
         let url = 'http://localhost:3000/#/Produtos/post_produtos'
         let failMsg = 'Falha na excução do cenário cadastrar produto'
         let payload = JSON.stringify({
-            nome: faker.animal,
-            preco: faker.number,
-            descricao: faker.definitions,
-            quantidade: faker.number.int
+            nome: faker.commerce.productName(),
+            preco: faker.commerce.price(),
+            descricao: faker.commerce.productDescription(),
+            quantidade: faker.number.float()
         })
+
+        const token = auth()
 
       let params = {
         headers: {
-            Authorization: `${setup.token}`,
+            'Authorization': `${token}`,
             'Content-Type': 'application/json',
         }
       }

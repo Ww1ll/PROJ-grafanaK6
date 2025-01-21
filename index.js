@@ -3,7 +3,7 @@ import getAllProducts from "./scenarios/getAllProducts.js";
 import { group, sleep } from 'k6';
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 import postProduct from "./scenarios/postProduct.js";
-import setup from "./setup.js";
+//import auth from "./auth.js";
 
 
 export let options = {
